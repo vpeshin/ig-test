@@ -12,10 +12,15 @@
   <script type="text/javascript" language="javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+  <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+  <script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/1.10.16/sorting/datetime-moment.js"></script>
+  <script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/1.10.16/sorting/formatted-numbers.js"></script>
 
   <script type="text/javascript" language="javascript" class="init">
-
     $(document).ready(function () {
+
+      $.fn.dataTable.moment('DD.MM.YYYY');
+
       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
       });
@@ -25,6 +30,9 @@
           url: 'https://raw.githubusercontent.com/avallakh/InitGroupTST/master/Table1.json',
           dataSrc: "tenders"
         },
+        columnDefs: [
+          { type: 'formatted-num', targets: 2 }
+        ],
         columns: [
           { "data": "Id" },
           { "data": "name" },
